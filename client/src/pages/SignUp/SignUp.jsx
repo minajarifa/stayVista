@@ -1,16 +1,68 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
+import useAuth from '../../hooks/useAuth'
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { ImSpinner9 } from "react-icons/im";
+import { RxGithubLogo } from "react-icons/rx";
+
 
 const SignUp = () => {
-  
+  const navigate = useNavigate();
+  const {
+    loading,
+    setLoading,
+    createUser,
+    updateUserProfile,
+    signInWithGoogle,
+    // signInWithGithub
+  } = useAuth();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const image = form.image.files[0];
+    const formData = new FormData()
+    formData.append('image', image)
+    try {
+      setLoading(true)
+      //  upload img and get img
+      const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, formData)
+      console.log(data.data.display_url)
+      // user Registration
+      const result = await createUser(email, password);
+      console.log(result);
+      // save userName and Photo
+      await updateUserProfile(name, data.data.display_url)
+      navigate("/");
+      toast.success('Signup Successfully')
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+  }
+  const handleGoogleSignIn = async()=>{
+    try {
+      setLoading(true)
+     await signInWithGoogle()
+      navigate("/");
+      toast.success('Signup Successfully')
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+  }
   return (
     <div className='flex items-center justify-center min-h-screen'>
       <div className='flex flex-col max-w-md p-6 text-gray-900 bg-gray-100 rounded-md sm:p-10'>
         <div className='mb-8 text-center'>
-          <h1 className='my-3 text-4xl font-bold'>Sign Up</h1>
-          <p className='text-sm text-gray-400'>Welcome to StayVista</p>
+          <h1 className='my-3 text-4xl font-bold '>Sign Up</h1>
+          <p className='text-sm text-gray-400 '>Welcome to StayVista</p>
         </div>
         <form
+          onSubmit={handleSubmit}
           noValidate=''
           action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'
@@ -75,10 +127,13 @@ const SignUp = () => {
 
           <div>
             <button
+            disabled={loading}
               type='submit'
               className='w-full py-3 text-white rounded-md bg-rose-500'
             >
-              Continue
+              {
+                loading?<ImSpinner9 className='text-center animate-spin'/>:"Continue"
+              }
             </button>
           </div>
         </form>
@@ -89,11 +144,16 @@ const SignUp = () => {
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-        <div className='flex items-center justify-center p-2 m-3 space-x-2 border border-gray-300 cursor-pointer border-rounded'>
+        <button disabled={loading} onClick={handleGoogleSignIn} className='flex items-center justify-center p-2 m-3 space-x-2 border border-gray-300 cursor-pointer border-rounded'>
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
-        </div>
+        </button>
+        <button disabled={loading} className='flex items-center justify-center p-2 m-3 space-x-2 border border-gray-300 cursor-pointer border-rounded'>
+          <RxGithubLogo size={32} />
+
+          <p>Continue with Github</p>
+        </button>
         <p className='px-6 text-sm text-center text-gray-400'>
           Already have an account?
           <Link

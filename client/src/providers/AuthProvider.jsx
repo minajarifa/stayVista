@@ -74,6 +74,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
+      console.log(currentUser)
       if (currentUser) {
         getToken(currentUser.email)
       }
@@ -88,13 +89,13 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     setLoading,
-    createUser,
     signIn,
+    createUser,
     signInWithGoogle,
-    resetPassword,
-    logOut,
-    updateUserProfile,
     signInWithGithub,
+    resetPassword,
+    updateUserProfile,
+    logOut,
   }
 
   return (
