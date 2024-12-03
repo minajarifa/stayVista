@@ -46,10 +46,9 @@ const Login = () => {
   const handleResetPassword = async () => {
     if (!email) return toast.error("Please write your email first")
     try {
-      setLoading(true)
       await resetPassword(email)
-      navigate("/");
       toast.success('Request success! Check your email for further procss...')
+      setLoading(false)
     } catch (error) {
       console.log(error);
       toast.error(error.message)

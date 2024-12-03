@@ -26,12 +26,10 @@ const AuthProvider = ({ children }) => {
     setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password)
   }
-
   const signIn = (email, password) => {
     setLoading(true)
     return signInWithEmailAndPassword(auth, email, password)
   }
-
   const signInWithGoogle = () => {
     setLoading(true)
     return signInWithPopup(auth, googleProvider)
@@ -40,12 +38,10 @@ const AuthProvider = ({ children }) => {
     setLoading(true)
     return signInWithPopup(auth, githubProvider)
   }
-
   const resetPassword = email => {
     setLoading(true)
     return sendPasswordResetEmail(auth, email)
   }
-
   const logOut = async () => {
     setLoading(true)
     await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
@@ -53,7 +49,6 @@ const AuthProvider = ({ children }) => {
     })
     return signOut(auth)
   }
-
   const updateUserProfile = (name, photo) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
@@ -69,7 +64,6 @@ const AuthProvider = ({ children }) => {
     )
     return data
   }
-
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -84,7 +78,6 @@ const AuthProvider = ({ children }) => {
       return unsubscribe()
     }
   }, [])
-
   const authInfo = {
     user,
     loading,

@@ -15,7 +15,7 @@ const SignUp = () => {
     createUser,
     updateUserProfile,
     signInWithGoogle,
-    // signInWithGithub
+    signInWithGithub
   } = useAuth();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +47,17 @@ const SignUp = () => {
     try {
       setLoading(true)
      await signInWithGoogle()
+      navigate("/");
+      toast.success('Signup Successfully')
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+  }
+  const handleGithubSignIn = async()=>{
+    try {
+      setLoading(true)
+     await signInWithGithub()
       navigate("/");
       toast.success('Signup Successfully')
     } catch (error) {
@@ -149,7 +160,7 @@ const SignUp = () => {
 
           <p>Continue with Google</p>
         </button>
-        <button disabled={loading} className='flex items-center justify-center p-2 m-3 space-x-2 border border-gray-300 cursor-pointer border-rounded'>
+        <button disabled={loading} onClick={handleGithubSignIn} className='flex items-center justify-center p-2 m-3 space-x-2 border border-gray-300 cursor-pointer border-rounded'>
           <RxGithubLogo size={32} />
 
           <p>Continue with Github</p>
