@@ -7,14 +7,14 @@ import { useSearchParams } from 'react-router-dom'
 import useAxiosCommon from '../../hooks/useAxiosCommon'
 
 const Rooms = () => {
-  const axiosCommon = useAxiosCommon()
+  const axiosCommon = useAxiosCommon();
   const [params, setParams] = useSearchParams();
   const category = params.get('category');
-  console.log(category)
+  console.log(category);
 
-  
-  const { data:rooms = [], isLoading } = useQuery({
-    queryKey: ["rooms",category],
+
+  const { data: rooms = [], isLoading } = useQuery({
+    queryKey: ["rooms", category],
     queryFn: async () => {
       const { data } = await axiosCommon.get(`/rooms?category=${category}`);
       console.log(data)

@@ -142,11 +142,9 @@ const Login = () => {
           >
             Sign up
           </Link>
-          .
         </p>
       </div>
     </div>
   )
 }
-
 export default Login
