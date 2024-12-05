@@ -76,7 +76,6 @@ async function run() {
         res.status(500).send(err);
       }
     });
-
     // Get all rooms from db
     app.get("/rooms", async (req, res) => {
       const category = req.query.category;
@@ -92,7 +91,6 @@ async function run() {
       const result = await roomsCollection.findOne(query);
       res.send(result);
     });
-
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(

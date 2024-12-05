@@ -10,10 +10,10 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className='fixed w-full bg-white z-10 shadow-sm'>
+    <div className='fixed z-10 w-full bg-white shadow-sm'>
       <div className='py-4 border-b-[1px]'>
         <Container>
-          <div className='flex flex-row  items-center justify-between gap-3 md:gap-0'>
+          <div className='flex flex-row items-center justify-between gap-3 md:gap-0'>
             {/* Logo */}
             <Link to='/'>
               <img
@@ -32,7 +32,7 @@ const Navbar = () => {
                   {!user && (
                     <button
                       disabled={!user}
-                      className='disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-sm font-semibold rounded-full  transition'
+                      className='px-4 py-3 text-sm font-semibold transition rounded-full cursor-pointer disabled:cursor-not-allowed hover:bg-neutral-100'
                     >
                       Host your home
                     </button>
@@ -62,16 +62,22 @@ const Navbar = () => {
                   <div className='flex flex-col cursor-pointer'>
                     <Link
                       to='/'
-                      className='block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                      className='block px-4 py-3 font-semibold transition md:hidden hover:bg-neutral-100'
                     >
                       Home
                     </Link>
 
                     {user ? (
                       <>
+                      <Link
+                      to='/dashboard'
+                      className='block px-4 py-3 font-semibold transition hover:bg-neutral-100'
+                    >
+                      Dashboard
+                    </Link>
                         <div
                           onClick={logOut}
-                          className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                          className='px-4 py-3 font-semibold transition cursor-pointer hover:bg-neutral-100'
                         >
                           Logout
                         </div>
@@ -80,13 +86,13 @@ const Navbar = () => {
                       <>
                         <Link
                           to='/login'
-                          className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                          className='px-4 py-3 font-semibold transition hover:bg-neutral-100'
                         >
                           Login
                         </Link>
                         <Link
                           to='/signup'
-                          className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                          className='px-4 py-3 font-semibold transition hover:bg-neutral-100'
                         >
                           Sign Up
                         </Link>

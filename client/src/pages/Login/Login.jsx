@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
@@ -7,6 +7,8 @@ import { useState } from 'react';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const form =  location?.state || "/"
   const [email, setEmail] = useState("")
   const {
     // loading,
@@ -24,7 +26,7 @@ const Login = () => {
     try {
       setLoading(true)
       await signIn(email, password)
-      navigate("/");
+      navigate(form);
       toast.success('Signup Successfully')
     } catch (error) {
       console.log(error);
@@ -36,7 +38,7 @@ const Login = () => {
     try {
       setLoading(true)
       await signInWithGoogle()
-      navigate("/");
+      navigate(form);
       toast.success('Signup Successfully')
     } catch (error) {
       console.log(error);
@@ -44,6 +46,7 @@ const Login = () => {
     }
   }
   const handleResetPassword = async () => {
+    console.log('handleResetPassword')
     if (!email) return toast.error("Please write your email first")
     try {
       await resetPassword(email)
@@ -75,7 +78,7 @@ const Login = () => {
                 Email address
               </label>
               <input
-                onChange={e => setEmail(e.target.value)}
+                onBlur={e => setEmail(e.target.value)}
                 type='email'
                 name='email'
                 id='email'
@@ -102,7 +105,6 @@ const Login = () => {
               />
             </div>
           </div>
-
           <div>
             <button
               type='submit'
@@ -135,7 +137,7 @@ const Login = () => {
           <p>Continue with Github</p>
         </button>
         <p className='px-6 text-sm text-center text-gray-400'>
-          Don&apos;t have an account yet?{' '}
+          Don&apos;t have an account yet?
           <Link
             to='/signup'
             className='text-gray-600 hover:underline hover:text-rose-500'
