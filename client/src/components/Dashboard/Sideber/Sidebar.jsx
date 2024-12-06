@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { GrLogout } from 'react-icons/gr'
 import { FcSettings } from 'react-icons/fc'
-import { BsFillHouseAddFill} from 'react-icons/bs'
+import { BsFillHouseAddFill } from 'react-icons/bs'
 import { AiOutlineBars } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
 import { NavLink } from 'react-router-dom'
@@ -34,7 +34,6 @@ const Sidebar = () => {
                         </Link>
                     </div>
                 </div>
-
                 <button
                     onClick={handleToggle}
                     className='p-4 mobile-menu-button focus:outline-none focus:bg-gray-200'
@@ -42,7 +41,6 @@ const Sidebar = () => {
                     <AiOutlineBars className='w-5 h-5' />
                 </button>
             </div>
-
             {/* Sidebar */}
             <div
                 className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${isActive && '-translate-x-full'
@@ -62,16 +60,14 @@ const Sidebar = () => {
                             </Link>
                         </div>
                     </div>
-
                     {/* Nav Items */}
                     <div className='flex flex-col justify-between flex-1 mt-6'>
                         {/* Conditional toggle button here.. */}
-
                         {/*  Menu Items */}
                         <nav>
                             {/* Statistics */}
                             <NavLink
-                                to='statistics'
+                                to='/dashboard'
                                 className={({ isActive }) =>
                                     `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
                                     }`
@@ -81,38 +77,33 @@ const Sidebar = () => {
 
                                 <span className='mx-4 font-medium'>Statistics</span>
                             </NavLink>
-
                             {/* Add Room */}
                             <NavLink
-                                to='add-room'
+                                to='/dashboard/AddRoom'
                                 className={({ isActive }) =>
                                     `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
                                     }`
                                 }
                             >
                                 <BsFillHouseAddFill className='w-5 h-5' />
-
                                 <span className='mx-4 font-medium'>Add Room</span>
                             </NavLink>
                             {/* My Listing */}
                             <NavLink
-                                to='my-listings'
+                                to='/dashboard/MyListings'
                                 className={({ isActive }) =>
                                     `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
                                     }`
                                 }
                             >
                                 <MdHomeWork className='w-5 h-5' />
-
                                 <span className='mx-4 font-medium'>My Listings</span>
                             </NavLink>
                         </nav>
                     </div>
                 </div>
-
                 <div>
                     <hr />
-
                     {/* Profile Menu */}
                     <NavLink
                         to='/dashboard/profile'
@@ -130,7 +121,6 @@ const Sidebar = () => {
                         className='flex items-center w-full px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform hover:bg-gray-300 hover:text-gray-700'
                     >
                         <GrLogout className='w-5 h-5' />
-
                         <span className='mx-4 font-medium'>Logout</span>
                     </button>
                 </div>
