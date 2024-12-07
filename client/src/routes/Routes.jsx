@@ -41,13 +41,13 @@ export const router = createBrowserRouter([
         ,
       },
       {
-        path:"/dashboard/AddRoom",
+        path:"/dashboard/add-room",
         element: 
           <AddRoom />
         ,
       },
       {
-        path:"/dashboard/MyListings",
+        path:"/dashboard/my-listings",
         element: 
           <MyListings />
         ,
